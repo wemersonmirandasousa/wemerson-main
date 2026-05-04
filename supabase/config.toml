@@ -1,0 +1,22 @@
+project_id = "edmnrnimbvofbjagvqln"
+
+[functions.import-tools]
+verify_jwt = false
+
+[functions.export-tools]
+verify_jwt = false
+
+[functions.smart-search]
+verify_jwt = false
+
+[functions.manage-users]
+verify_jwt = false
+
+[functions.seed-users]
+verify_jwt = false
+
+[functions.send-whatsapp-audit]
+verify_jwt = false
+
+[functions.export-system-markdown]
+verify_jwt = false

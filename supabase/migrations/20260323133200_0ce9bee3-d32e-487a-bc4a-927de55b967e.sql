@@ -1,0 +1,1 @@
+DROP TRIGGER IF EXISTS update_tools_updated_at ON public.tools;

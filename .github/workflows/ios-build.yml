@@ -1,0 +1,77 @@
+name: iOS Build (.ipa)
+
+on:
+  workflow_dispatch: # Permite rodar manualmente no GitHub
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'capacitor.config.ts'
+      - 'package.json'
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Web App
+        run: npm run build
+
+      - name: Setup Capacitor iOS
+        run: |
+          npm install @capacitor/ios
+          npx cap add ios || echo "iOS platform already added."
+          npx cap sync ios
+
+      - name: Prepare Unsigned IPA Build
+        run: |
+          # Não podemos usar exportArchive tradicional sem uma conta paga configurada no GitHub (com provision profiles).
+          # Por isso, forçamos o build de desenvolvimento sem assinatura localmente. O AltStore/TrollStore lidará com a assinatura no seu lado depois.
+          
+          cd ios/App
+          # Compilar o formato "App" não assinado para o simulador/dispositivo genérico
+          xcodebuild build \
+            -project App.xcodeproj \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath DerivedData \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_ENTITLEMENTS=""
+            
+          # Pegar o pacote da compilação (.app) e converter para .ipa
+          echo "Empacotando .app em .ipa..."
+          
+          APP_PATH=$(find . -type d -name "App.app" | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Erro: pasta App.app não foi encontrada após a compilação!"
+            exit 1
+          fi
+          
+          echo "App.app encontrado em: $APP_PATH"
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/
+          zip -q -r Wemerson.ipa Payload
+          
+          ls -lh Wemerson.ipa
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Wemerson-iOS-Unsigned-IPA
+          path: ios/App/Wemerson.ipa
+          retention-days: 7

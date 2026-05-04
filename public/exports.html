@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exportação Completa de Dados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-gray-800">📦 Exportação de Dados do Sistema</h1>
+        <p class="mb-6 text-gray-600 text-lg">Todos os conteúdos solicitados foram exportados para arquivos CSV. Você pode baixá-los individualmente abaixo:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border p-4 rounded-lg bg-blue-50">
+                <h2 class="font-semibold text-blue-800 mb-3">Principais</h2>
+                <ul class="space-y-2">
+                    <li><a href="/archived_tools.csv" class="text-blue-600 hover:underline">📁 Ferramentas Arquivadas</a></li>
+                    <li><a href="/knowledge_base.csv" class="text-blue-600 hover:underline">📁 Base de Conhecimento</a></li>
+                    <li><a href="/notes.csv" class="text-blue-600 hover:underline">📁 Notas</a></li>
+                    <li><a href="/social_cards.csv" class="text-blue-600 hover:underline">📁 Social Cards</a></li>
+                </ul>
+            </div>
+            
+            <div class="border p-4 rounded-lg bg-green-50">
+                <h2 class="font-semibold text-green-800 mb-3">Estrutura</h2>
+                <ul class="space-y-2">
+                    <li><a href="/categories.csv" class="text-green-600 hover:underline">📁 Categorias</a></li>
+                    <li><a href="/companies.csv" class="text-green-600 hover:underline">📁 Empresas</a></li>
+                    <li><a href="/departments.csv" class="text-green-600 hover:underline">📁 Departamentos</a></li>
+                    <li><a href="/site_settings.csv" class="text-green-600 hover:underline">📁 Configurações do Site</a></li>
+                </ul>
+            </div>
+            
+            <div class="border p-4 rounded-lg bg-purple-50">
+                <h2 class="font-semibold text-purple-800 mb-3">Relacionamentos e Detalhes</h2>
+                <ul class="space-y-2">
+                    <li><a href="/tool_links.csv" class="text-purple-600 hover:underline">📁 Links entre Ferramentas</a></li>
+                    <li><a href="/tool_blocks.csv" class="text-purple-600 hover:underline">📁 Blocos de Ferramentas</a></li>
+                    <li><a href="/tool_credentials.csv" class="text-purple-600 hover:underline">📁 Credenciais</a></li>
+                    <li><a href="/processes.csv" class="text-purple-600 hover:underline">📁 Processos</a></li>
+                    <li><a href="/process_attachments.csv" class="text-purple-600 hover:underline">📁 Anexos de Processos</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <p class="text-sm text-gray-500 italic">Estes arquivos contêm todos os dados identificados no sistema para exportação completa.</p>
+        </div>
+    </div>
+</body>
+</html>

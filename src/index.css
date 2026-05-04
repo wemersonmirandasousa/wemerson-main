@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 142 71% 45%;
+    --primary-orange: 33 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 10% 16%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 220 10% 16%;
+    --muted-foreground: 215 10% 55%;
+
+    --accent: 220 10% 16%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 142 71% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 20% 7%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 142 71% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 10% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 10% 18%;
+    --sidebar-ring: 142 71% 45%;
+
+    --surface-glass: 0 0% 100% / 0.04;
+    --border-glass: 0 0% 100% / 0.08;
+    --surface-hover: 0 0% 100% / 0.06;
+    --surface-active: 0 0% 100% / 0.10;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Copy button fade animations */
+.copy-btn-container .copy-btn {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.copy-btn-container:hover .copy-btn,
+.copy-btn-container:focus-within .copy-btn {
+  opacity: 1;
+}
+
+/* Logo hover animation */
+.logo-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+  cursor: pointer;
+}
+.logo-hover:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 24px rgba(255, 138, 0, 0.25)) drop-shadow(0 0 48px rgba(255, 138, 0, 0.1));
+}
+.logo-hover:active {
+  transform: scale(0.98);
+}
+
+/* Wallpaper background */
+.site-wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.site-wallpaper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, hsl(220 20% 7% / 0.82) 0%, hsl(220 20% 7% / 0.92) 100%);
+}
+
+/* No scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes rippleAnim {
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Social card drawer icon bounce animation */
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+.social-icon-btn:hover {
+  animation: iconBounce 0.4s ease;
+}
+
+/* Category marquee - infinite scroll, GPU-accelerated */
+@keyframes category-marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Category card sequential pulse - lightweight, no box-shadow */
+@keyframes category-pulse {
+  0%, 8%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    border-color: hsl(0 0% 100% / 0.08);
+  }
+  4% {
+    transform: scale(1.05);
+    opacity: 0.9;
+    border-color: hsl(142 71% 45% / 0.4);
+  }
+}
+
+@keyframes fadeOnly {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

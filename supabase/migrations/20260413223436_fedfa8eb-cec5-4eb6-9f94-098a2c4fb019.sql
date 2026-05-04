@@ -1,0 +1,1 @@
+ALTER TABLE public.tool_credentials ADD COLUMN credential_api text DEFAULT NULL;
